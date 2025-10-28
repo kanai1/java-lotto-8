@@ -1,6 +1,8 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lotto {
     private final List<Integer> numbers;
@@ -14,6 +16,14 @@ public class Lotto {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("[ERROR] 로또 번호는 6개여야 합니다.");
         }
+    }
+
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
+
+    public List<String> getNumbersString() {
+        return numbers.stream().map(Object::toString).collect(Collectors.toCollection(ArrayList::new));
     }
 
     // TODO: 추가 기능 구현
