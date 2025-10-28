@@ -17,6 +17,7 @@ public class View {
             "6개 일치 (2,000,000,000원) - %d개\n"
     );
     private static final String WINNING_RATE_OUTPUT_STATEMENT = "총 수익율은 %.1f%%입니다.\n";
+    private static final String ERROR_OUTPUT_STATEMENT = "[ERROR] %s\n";
 
     public String getLottoPurchaseAmount() {
         System.out.println(LOTTO_PURCHASE_AMOUNT_OUTPUT_STATEMENT);
@@ -48,5 +49,9 @@ public class View {
 
     public void printWinningRate(float winningRate) {
         System.out.printf(WINNING_RATE_OUTPUT_STATEMENT, winningRate);
+    }
+
+    public void printError(String errorMessage) {
+        System.out.printf(ERROR_OUTPUT_STATEMENT, errorMessage);
     }
 }
