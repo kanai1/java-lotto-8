@@ -16,6 +16,7 @@ public class View {
             "5개 일치, 보너스 볼 일치 (30,000,000원) - %d개\n",
             "6개 일치 (2,000,000,000원) - %d개\n"
     );
+    private static final String WINNING_RATE_OUTPUT_STATEMENT = "총 수익율은 %.1f%%입니다.\n";
 
     public String getLottoPurchaseAmount() {
         System.out.println(LOTTO_PURCHASE_AMOUNT_OUTPUT_STATEMENT);
@@ -43,5 +44,9 @@ public class View {
         for (int i = 0; i < 5; i++) {
             System.out.printf(WINNING_DETAIL_OUTPUT_STATEMENTS.get(i), rank.get(i));
         }
+    }
+
+    public void printWinningRate(float winningRate) {
+        System.out.printf(WINNING_RATE_OUTPUT_STATEMENT, winningRate);
     }
 }
