@@ -1,8 +1,11 @@
 package lotto.domain.lotto;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lotto {
     private final List<Integer> numbers;
@@ -12,9 +15,28 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    public static Lotto of(String input) {
+        List<Integer> numbers;
+        try{
+            numbers = Stream.of(input.split(",")).map(Integer::parseInt).toList();
+            return new Lotto(numbers);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("로또 번호는 1부터 45 사이의 숫자여야 합니다");
+        }
+    }
+
     private void validate(List<Integer> numbers) {
         if (numbers.size() != 6) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 6개여야 합니다.");
+            throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
+        }
+        if (new HashSet<>(numbers).size() != 6) {
+            throw new IllegalArgumentException("로또 번호는 중복되어선 안됩니다");
+        }
+        if(Collections.max(numbers) > 45) {
+            throw new IllegalArgumentException("로또 번호는 1부터 45 사이의 숫자여야 합니다");
+        }
+        if(Collections.min(numbers) < 1) {
+            throw new IllegalArgumentException("로또 번호는 1부터 45 사이의 숫자여야 합니다");
         }
     }
 
@@ -25,6 +47,4 @@ public class Lotto {
     public List<String> getNumbersString() {
         return numbers.stream().map(Object::toString).collect(Collectors.toCollection(ArrayList::new));
     }
-
-    // TODO: 추가 기능 구현
 }
