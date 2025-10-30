@@ -10,6 +10,10 @@ import java.util.stream.Stream;
 public class Lotto {
     private final List<Integer> numbers;
 
+    public Lotto(Lotto lotto) {
+        this.numbers = lotto.getNumbers();
+    }
+
     public Lotto(List<Integer> numbers) {
         validate(numbers);
         this.numbers = numbers;
