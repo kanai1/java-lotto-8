@@ -3,7 +3,6 @@ package lotto.domain.lotto;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -40,7 +39,7 @@ public class Lotto {
         if (numbers.size() != COUNT_OF_LOTTO) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
-        if (new HashSet<>(numbers).size() != COUNT_OF_LOTTO) {
+        if (numbers.stream().distinct().count() != COUNT_OF_LOTTO) {
             throw new IllegalArgumentException("로또 번호는 중복되어선 안됩니다");
         }
         if(Collections.max(numbers) > MAXIMUM_NUMBER) {
