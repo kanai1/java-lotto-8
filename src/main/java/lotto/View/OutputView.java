@@ -13,7 +13,7 @@ public class OutputView {
             "5개 일치, 보너스 볼 일치 (30,000,000원) - %d개\n",
             "6개 일치 (2,000,000,000원) - %d개\n"
     );
-    private static final String WINNING_RATE_OUTPUT_STATEMENT = "총 수익율은 %.1f%%입니다.\n";
+    private static final String WINNING_RATE_OUTPUT_STATEMENT = "총 수익률은 %.1f%%입니다.\n";
     private static final String ERROR_OUTPUT_STATEMENT = "[ERROR] %s\n";
 
     public void printPurchasedLottoNumber(List<Lotto> tickets) {
