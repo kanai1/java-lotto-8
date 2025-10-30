@@ -6,11 +6,6 @@ import java.util.function.Predicate;
 public class WinningLotto extends Lotto {
     private int bonusNumber;
 
-    public WinningLotto(List<Integer> numbers) {
-        super(numbers);
-        bonusNumber = 0;
-    }
-
     public WinningLotto(Lotto lotto) {
         super(lotto);
         bonusNumber = 0;
