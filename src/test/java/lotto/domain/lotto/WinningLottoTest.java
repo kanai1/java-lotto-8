@@ -27,7 +27,7 @@ public class WinningLottoTest {
         );
     }
 
-    static Stream<Arguments> argumentsForgetRankTest() {
+    static Stream<Arguments> argumentsForGetRankTest() {
         return Stream.of(
                 Arguments.of("1,2,3,4,5,6", 1),
                 Arguments.of("1,2,3,4,5,7", 2),
@@ -39,7 +39,7 @@ public class WinningLottoTest {
     }
 
     @BeforeEach
-    public void init(){
+    public void init() {
         winningLotto = new WinningLotto(Lotto.of("1,2,3,4,5,6"));
     }
 
@@ -58,7 +58,7 @@ public class WinningLottoTest {
     }
 
     @ParameterizedTest(name = "{displayName}({0}, expected = {1})")
-    @MethodSource("argumentsForgetRankTest")
+    @MethodSource("argumentsForGetRankTest")
     @DisplayName("당첨결과 테스트")
     public void getRankTest(String input, int expectedRank) {
         winningLotto.setBonusNumber("7");
