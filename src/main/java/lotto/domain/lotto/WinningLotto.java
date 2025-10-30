@@ -1,6 +1,9 @@
 package lotto.domain.lotto;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class WinningLotto extends Lotto {
     private int bonusNumber;
@@ -12,6 +15,7 @@ public class WinningLotto extends Lotto {
 
     public WinningLotto(Lotto lotto) {
         super(lotto);
+        bonusNumber = 0;
     }
 
     public void setBonusNumber(String input) {
@@ -32,5 +36,29 @@ public class WinningLotto extends Lotto {
         if(bonusNumber > 45 || bonusNumber < 1) {
             throw new IllegalArgumentException("보너스 번호는 1부터 45 사이의 숫자여야 합니다.");
         }
+    }
+
+    public int getRank(Lotto lotto) {
+        if(bonusNumber == 0) {
+            throw new IllegalArgumentException("보너스 번호가 초기화되지 않았습니다.");
+        }
+        int duplicationSize = getDuplicationNumberSize(lotto);
+        if (duplicationSize == 6) {
+            return 1;
+        }
+        if (duplicationSize == 5 && lotto.isContain(bonusNumber)) {
+            return 2;
+        }
+        if (duplicationSize >= 3) {
+            return 8 - duplicationSize;
+        }
+        return 0;
+    }
+
+    private int getDuplicationNumberSize(Lotto lotto) {
+        List<Integer> myLotto = lotto.getNumbers();
+        List<Integer> winningLotto = super.getNumbers();
+
+        return myLotto.stream().filter(o -> winningLotto.stream().anyMatch(Predicate.isEqual(o))).toList().size();
     }
 }
