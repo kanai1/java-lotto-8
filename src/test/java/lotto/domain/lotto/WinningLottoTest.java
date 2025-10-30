@@ -2,6 +2,7 @@ package lotto.domain.lotto;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,13 +27,24 @@ public class WinningLottoTest {
         );
     }
 
+    static Stream<Arguments> argumentsForgetRankTest() {
+        return Stream.of(
+                Arguments.of("1,2,3,4,5,6", 1),
+                Arguments.of("1,2,3,4,5,7", 2),
+                Arguments.of("1,2,3,4,5,41", 3),
+                Arguments.of("1,2,3,4,41,42", 4),
+                Arguments.of("1,2,3,40,41,42", 5),
+                Arguments.of("40,41,42,43,44,45", 0)
+        );
+    }
+
     @BeforeEach
     public void init(){
         winningLotto = new WinningLotto(Lotto.of("1,2,3,4,5,6"));
     }
 
     @Test
-    @DisplayName("보너스번호 검증 테스트(1,2,3,4,5,6 / 7)")
+    @DisplayName("보너스 번호 검증 테스트(1,2,3,4,5,6 / 7)")
     public void bonusNumberSuccessTest() {
         assertThatCode(() -> winningLotto.setBonusNumber("7")).doesNotThrowAnyException();
     }
@@ -43,5 +55,13 @@ public class WinningLottoTest {
     public void bonusNumberFailTest(String input, String errorMessage) {
         assertThatThrownBy(() -> winningLotto.setBonusNumber(input))
                 .isInstanceOf(IllegalArgumentException.class).hasMessageContaining(errorMessage);
+    }
+
+    @ParameterizedTest(name = "{displayName}({0}, expected = {1})")
+    @MethodSource("argumentsForgetRankTest")
+    @DisplayName("당첨결과 테스트")
+    public void getRankTest(String input, int expectedRank) {
+        winningLotto.setBonusNumber("7");
+        assertThat(winningLotto.getRank(Lotto.of(input))).isEqualTo(expectedRank);
     }
 }
