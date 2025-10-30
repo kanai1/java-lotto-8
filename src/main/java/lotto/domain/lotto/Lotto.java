@@ -2,6 +2,7 @@ package lotto.domain.lotto;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,7 +17,8 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         validate(numbers);
-        this.numbers = numbers;
+        this.numbers = new ArrayList<>(numbers);
+        this.numbers.sort(Comparator.naturalOrder());
     }
 
     public static Lotto of(String input) {
@@ -50,5 +52,9 @@ public class Lotto {
 
     public List<String> getNumbersString() {
         return numbers.stream().map(Object::toString).collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public boolean isContain(int number) {
+        return numbers.contains(number);
     }
 }
