@@ -23,7 +23,7 @@ public class WinningLotto extends Lotto {
     }
 
     private void validateBonusNumber(int bonusNumber) {
-        if(this.getNumbers().contains(bonusNumber)) {
+        if(isContain(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호는 로또번호와 중복될 수 없습니다.");
         }
         if(bonusNumber > 45 || bonusNumber < 1) {
@@ -50,7 +50,7 @@ public class WinningLotto extends Lotto {
 
     private int getDuplicationNumberSize(Lotto lotto) {
         List<Integer> myLotto = lotto.getNumbers();
-        List<Integer> winningLotto = super.getNumbers();
+        List<Integer> winningLotto = getNumbers();
 
         return myLotto.stream().filter(o -> winningLotto.stream().anyMatch(Predicate.isEqual(o))).toList().size();
     }
