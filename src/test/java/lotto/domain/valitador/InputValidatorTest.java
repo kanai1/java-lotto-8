@@ -19,7 +19,8 @@ public class InputValidatorTest {
                 Arguments.of("10001", "구매금액은 1000원 단위로 나누어 떨어져야 합니다"),
                 Arguments.of("1000원", "구매금액은 숫자로 이루어져야 합니다"),
                 Arguments.of(" ", "구매금액은 숫자로 이루어져야 합니다"),
-                Arguments.of("", "구매금액은 숫자로 이루어져야 합니다")
+                Arguments.of("", "구매금액은 숫자로 이루어져야 합니다"),
+                Arguments.of("-1000", "구매금액은 1000원 이상이여야 합니다")
         );
     }
 
