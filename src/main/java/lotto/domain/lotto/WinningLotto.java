@@ -32,9 +32,6 @@ public class WinningLotto extends Lotto {
     }
 
     public int getRank(Lotto lotto) {
-        if(bonusNumber == 0) {
-            throw new IllegalArgumentException("보너스 번호가 초기화되지 않았습니다.");
-        }
         int duplicationSize = getDuplicationNumberSize(lotto);
         if (duplicationSize == 6) {
             return 1;
