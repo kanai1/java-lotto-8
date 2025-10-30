@@ -40,10 +40,9 @@ public class LottoMachine {
     }
 
     private int initPurchaseAmount() {
-        String input;
         while(true) {
             try {
-                input = inputView.getLottoPurchaseAmount();
+                String input = inputView.getLottoPurchaseAmount();
                 return inputValidator.purchaseAmountValidator(input);
             }
             catch (IllegalArgumentException e) {
@@ -59,12 +58,10 @@ public class LottoMachine {
     }
 
     private WinningLotto initWinningNumber() {
-        String input;
-        WinningLotto winningLotto;
-        winningLotto = new WinningLotto(getWinningNumber());
+        WinningLotto winningLotto = new WinningLotto(getWinningNumber());
         while(true) {
             try {
-                input = inputView.getLottoBonusNumber();
+                String input = inputView.getLottoBonusNumber();
                 winningLotto.setBonusNumber(input);
                 return winningLotto;
             } catch (IllegalArgumentException e) {
@@ -74,10 +71,9 @@ public class LottoMachine {
     }
 
     private Lotto getWinningNumber() {
-        String input;
         while(true) {
             try {
-                input = inputView.getLottoWinningNumber();
+                String input = inputView.getLottoWinningNumber();
                 return Lotto.of(input);
             } catch (IllegalArgumentException e) {
                 outputView.printError(e.getMessage());
