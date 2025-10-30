@@ -1,9 +1,7 @@
 package lotto.domain.lotto;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class WinningLotto extends Lotto {
     private int bonusNumber;
