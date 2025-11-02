@@ -8,13 +8,11 @@ import lotto.View.OutputView;
 import lotto.domain.lotto.Lotto;
 import lotto.domain.lotto.LottoFactory;
 import lotto.domain.lotto.WinningLotto;
-import lotto.domain.vaildator.InputValidator;
 
 public class LottoMachine {
 
     private final InputView inputView;
     private final OutputView outputView;
-    private final InputValidator inputValidator;
     private final LottoFactory lottoFactory;
 
     private static final long FIRST_PRICE = 2_000_000_000L;
@@ -23,10 +21,9 @@ public class LottoMachine {
     private static final long FOURTH_PRICE = 50_000L;
     private static final long FIFTH_PRICE = 5_000L;
 
-    public LottoMachine(InputView inputView, OutputView outputView, InputValidator inputValidator, LottoGenerator lottoGenerator) {
+    public LottoMachine(InputView inputView, OutputView outputView, LottoGenerator lottoGenerator) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.inputValidator = inputValidator;
         this.lottoFactory = new LottoFactory(lottoGenerator);
     }
 
@@ -42,8 +39,7 @@ public class LottoMachine {
     private int initPurchaseAmount() {
         while(true) {
             try {
-                String input = inputView.getLottoPurchaseAmount();
-                return inputValidator.purchaseAmountValidator(input);
+                return inputView.getLottoPurchaseAmount();
             }
             catch (IllegalArgumentException e) {
                 outputView.printError(e.getMessage());
