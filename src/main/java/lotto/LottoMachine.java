@@ -1,5 +1,7 @@
 package lotto;
 
+import static lotto.Config.LOTTO_PRICE;
+
 import java.util.Arrays;
 import java.util.List;
 import lotto.Util.LottoGenerator;
@@ -29,7 +31,7 @@ public class LottoMachine {
 
     public void run() {
         int purchaseAmount = initPurchaseAmount();
-        List<Lotto> lotto = generateLotto(purchaseAmount / 1000);
+        List<Lotto> lotto = generateLotto(purchaseAmount / LOTTO_PRICE);
         WinningLotto winningLotto = initWinningNumber();
         float result = getResult(purchaseAmount, lotto, winningLotto);
 

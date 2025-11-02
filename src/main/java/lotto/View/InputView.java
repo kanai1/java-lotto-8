@@ -1,5 +1,7 @@
 package lotto.View;
 
+import static lotto.Config.LOTTO_PRICE;
+
 import camp.nextstep.edu.missionutils.Console;
 import java.util.List;
 import java.util.stream.Stream;
@@ -26,17 +28,16 @@ public class InputView {
     }
 
     private int validatePurchaseAmount(String input) {
-        final int PURCHASE_AMOUNT_UNIT = 1000;
         int amount;
         try {
             amount = Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("구매금액은 숫자로 이루어져야 합니다.");
         }
-        if (amount < PURCHASE_AMOUNT_UNIT) {
+        if (amount < LOTTO_PRICE) {
             throw new IllegalArgumentException("구매금액은 1000원 이상이여야 합니다.");
         }
-        if (amount % PURCHASE_AMOUNT_UNIT != 0) {
+        if (amount % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException("구매금액은 1000원 단위로 나누어 떨어져야 합니다.");
         }
         return amount;
