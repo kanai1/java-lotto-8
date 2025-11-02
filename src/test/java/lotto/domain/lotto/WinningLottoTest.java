@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -26,18 +27,18 @@ public class WinningLottoTest {
 
     static Stream<Arguments> argumentsForGetRankTest() {
         return Stream.of(
-                Arguments.of("1,2,3,4,5,6", 1),
-                Arguments.of("1,2,3,4,5,7", 2),
-                Arguments.of("1,2,3,4,5,41", 3),
-                Arguments.of("1,2,3,4,41,42", 4),
-                Arguments.of("1,2,3,40,41,42", 5),
-                Arguments.of("40,41,42,43,44,45", 0)
+                Arguments.of(List.of(1,2,3,4,5,6), 1),
+                Arguments.of(List.of(1,2,3,4,5,7), 2),
+                Arguments.of(List.of(1,2,3,4,5,41), 3),
+                Arguments.of(List.of(1,2,3,4,41,42), 4),
+                Arguments.of(List.of(1,2,3,40,41,42), 5),
+                Arguments.of(List.of(40,41,42,43,44,45), 0)
         );
     }
 
     @BeforeEach
     public void init() {
-        lotto = new Lotto(Lotto.of("1,2,3,4,5,6"));
+        lotto = new Lotto(List.of(1,2,3,4,5,6));
     }
 
     @Test
@@ -57,8 +58,8 @@ public class WinningLottoTest {
     @ParameterizedTest(name = "{displayName}({0}, expected = {1})")
     @MethodSource("argumentsForGetRankTest")
     @DisplayName("당첨결과 테스트")
-    public void getRankTest(String input, int expectedRank) {
+    public void getRankTest(List<Integer> input, int expectedRank) {
         WinningLotto winningLotto = new WinningLotto(lotto, 7);
-        assertThat(winningLotto.getRank(Lotto.of(input))).isEqualTo(expectedRank);
+        assertThat(winningLotto.getRank(new Lotto(input))).isEqualTo(expectedRank);
     }
 }

@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Lotto {
 
@@ -23,16 +22,6 @@ public class Lotto {
         validate(numbers);
         this.numbers = new ArrayList<>(numbers);
         this.numbers.sort(Comparator.naturalOrder());
-    }
-
-    public static Lotto of(String input) {
-        List<Integer> numbers;
-        try{
-            numbers = Stream.of(input.split(",")).map(Integer::parseInt).toList();
-            return new Lotto(numbers);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("로또 번호는 1부터 45 사이의 숫자여야 합니다");
-        }
     }
 
     private void validate(List<Integer> numbers) {
