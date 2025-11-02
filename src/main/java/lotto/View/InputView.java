@@ -52,7 +52,7 @@ public class InputView {
         }
     }
 
-    public int validateBonusNumber(String input) {
+    private int validateBonusNumber(String input) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
