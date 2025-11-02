@@ -4,20 +4,10 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class WinningLotto extends Lotto {
-    private int bonusNumber;
+    private final int bonusNumber;
 
-    public WinningLotto(Lotto lotto) {
+    public WinningLotto(Lotto lotto, int bonusNumber) {
         super(lotto);
-        bonusNumber = 0;
-    }
-
-    public void setBonusNumber(String input) {
-        int bonusNumber;
-        try {
-            bonusNumber = Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("보너스 번호는 1부터 45 사이의 숫자여야 합니다.");
-        }
         validateBonusNumber(bonusNumber);
         this.bonusNumber = bonusNumber;
     }
