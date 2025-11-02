@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class WinningLotto extends Lotto {
+
     private final int bonusNumber;
 
     public WinningLotto(Lotto lotto, int bonusNumber) {
