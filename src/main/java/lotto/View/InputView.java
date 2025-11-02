@@ -1,6 +1,8 @@
 package lotto.View;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.List;
+import java.util.stream.Stream;
 
 public class InputView {
 
@@ -10,12 +12,12 @@ public class InputView {
 
     public int getLottoPurchaseAmount() {
         System.out.println(LOTTO_PURCHASE_AMOUNT_OUTPUT_STATEMENT);
-        return validatepurchaseAmount(Console.readLine());
+        return validatePurchaseAmount(Console.readLine());
     }
 
-    public String getLottoWinningNumber() {
+    public List<Integer> getLottoWinningNumber() {
         System.out.println(LOTTO_WINNING_NUMBER_OUTPUT_STATEMENT);
-        return Console.readLine();
+        return validateLottoWinningNumber(Console.readLine());
     }
 
     public int getLottoBonusNumber() {
@@ -23,7 +25,7 @@ public class InputView {
         return validateBonusNumber(Console.readLine());
     }
 
-    private int validatepurchaseAmount(String input) {
+    private int validatePurchaseAmount(String input) {
         final int PURCHASE_AMOUNT_UNIT = 1000;
         int amount;
         try {
@@ -38,6 +40,16 @@ public class InputView {
             throw new IllegalArgumentException("구매금액은 1000원 단위로 나누어 떨어져야 합니다.");
         }
         return amount;
+    }
+
+    private List<Integer> validateLottoWinningNumber(String input) {
+        List<Integer> numbers;
+        try{
+            numbers = Stream.of(input.split(",")).map(Integer::parseInt).toList();
+            return numbers;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("로또 번호는 1부터 45 사이의 숫자여야 합니다");
+        }
     }
 
     public int validateBonusNumber(String input) {

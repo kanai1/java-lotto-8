@@ -16,14 +16,11 @@ class LottoTest {
 
     static Stream<Arguments> argumentsForOfTest() {
         return Stream.of(
-                Arguments.of("1,2,3,4,5", "로또 번호는 6개여야 합니다"),
-                Arguments.of("1,2,3,4,5,6,7", "로또 번호는 6개여야 합니다"),
-                Arguments.of("", "로또 번호"),
-                Arguments.of("a,b,c,d", "로또 번호"),
-                Arguments.of("a,b,c,d,e,f", "로또 번호는 1부터 45 사이의 숫자여야 합니다"),
-                Arguments.of("0,1,2,3,4,5", "로또 번호는 1부터 45 사이의 숫자여야 합니다"),
-                Arguments.of("1,2,3,4,5,46", "로또 번호는 1부터 45 사이의 숫자여야 합니다"),
-                Arguments.of("1,2,3,4,5,5", "로또 번호는 중복되어선 안됩니다")
+                Arguments.of(List.of(1,2,3,4,5), "로또 번호는 6개여야 합니다"),
+                Arguments.of(List.of(1,2,3,4,5,6,7), "로또 번호는 6개여야 합니다"),
+                Arguments.of(List.of(0,1,2,3,4,5), "로또 번호는 1부터 45 사이의 숫자여야 합니다"),
+                Arguments.of(List.of(1,2,3,4,5,46), "로또 번호는 1부터 45 사이의 숫자여야 합니다"),
+                Arguments.of(List.of(1,2,3,4,5,5), "로또 번호는 중복되어선 안됩니다")
         );
     }
 
@@ -43,14 +40,14 @@ class LottoTest {
     @ParameterizedTest(name = "{displayName}({0})")
     @DisplayName("로또 검증 테스트")
     @MethodSource("argumentsForOfTest")
-    void ofTest(String input, String errorMessage) {
-        assertThatThrownBy(() -> Lotto.of(input))
+    void ofTest(List<Integer> input, String errorMessage) {
+        assertThatThrownBy(() -> new Lotto(input))
                 .isInstanceOf(IllegalArgumentException.class).hasMessageContaining(errorMessage);
     }
 
     @Test
     @DisplayName("로또 검증 테스트(1,2,3,4,5,6)")
     void ofSuccessTest() {
-        assertThatCode(() -> Lotto.of("1,2,3,4,5,6")).doesNotThrowAnyException();
+        assertThatCode(() -> new Lotto(List.of(1,2,3,4,5,6))).doesNotThrowAnyException();
     }
 }

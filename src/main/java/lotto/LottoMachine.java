@@ -68,8 +68,8 @@ public class LottoMachine {
     private Lotto getWinningNumber() {
         while(true) {
             try {
-                String input = inputView.getLottoWinningNumber();
-                return Lotto.of(input);
+                List<Integer> numbers = inputView.getLottoWinningNumber();
+                return new Lotto(numbers);
             } catch (IllegalArgumentException e) {
                 outputView.printError(e.getMessage());
             }
