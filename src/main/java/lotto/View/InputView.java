@@ -17,12 +17,12 @@ public class InputView {
 
     public List<Integer> getLottoWinningNumber() {
         System.out.println(LOTTO_WINNING_NUMBER_OUTPUT_STATEMENT);
-        return validateLottoWinningNumber(Console.readLine());
+        return parseLottoWinningNumber(Console.readLine());
     }
 
     public int getLottoBonusNumber() {
         System.out.println(LOTTO_BONUS_NUMBER_OUTPUT_STATEMENT);
-        return validateBonusNumber(Console.readLine());
+        return parseBonusNumber(Console.readLine());
     }
 
     private int validatePurchaseAmount(String input) {
@@ -42,7 +42,7 @@ public class InputView {
         return amount;
     }
 
-    private List<Integer> validateLottoWinningNumber(String input) {
+    private List<Integer> parseLottoWinningNumber(String input) {
         List<Integer> numbers;
         try{
             numbers = Stream.of(input.split(",")).map(Integer::parseInt).toList();
@@ -52,7 +52,7 @@ public class InputView {
         }
     }
 
-    private int validateBonusNumber(String input) {
+    private int parseBonusNumber(String input) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
