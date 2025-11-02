@@ -54,12 +54,11 @@ public class LottoMachine {
     }
 
     private WinningLotto initWinningNumber() {
-        WinningLotto winningLotto = new WinningLotto(getWinningNumber());
+        Lotto lotto = new Lotto(getWinningNumber());
         while(true) {
             try {
-                String input = inputView.getLottoBonusNumber();
-                winningLotto.setBonusNumber(input);
-                return winningLotto;
+                int input = inputView.getLottoBonusNumber();
+                return new WinningLotto(lotto, input);
             } catch (IllegalArgumentException e) {
                 outputView.printError(e.getMessage());
             }
