@@ -18,9 +18,9 @@ public class OutputView {
 
     public void printPurchasedLottoNumber(List<Lotto> tickets) {
         System.out.printf(PURCHASED_LOTTO_NUMBER_OUTPUT_FORMAT, tickets.size());
-        for (Lotto lotto: tickets) {
-            System.out.println("["+String.join(", ", String.join(", ", lotto.getNumbersString()))+"]");
-        }
+        tickets.forEach(
+                lotto -> System.out.println("["+String.join(", ", String.join(", ", lotto.getNumbersString()))+"]")
+        );
     }
 
     public void printWinningDetail(List<Integer> rank) {
