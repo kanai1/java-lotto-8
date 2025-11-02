@@ -10,7 +10,7 @@ public class InputView {
 
     public int getLottoPurchaseAmount() {
         System.out.println(LOTTO_PURCHASE_AMOUNT_OUTPUT_STATEMENT);
-        return purchaseAmountValidator(Console.readLine());
+        return validatepurchaseAmount(Console.readLine());
     }
 
     public String getLottoWinningNumber() {
@@ -18,12 +18,12 @@ public class InputView {
         return Console.readLine();
     }
 
-    public String getLottoBonusNumber() {
+    public int getLottoBonusNumber() {
         System.out.println(LOTTO_BONUS_NUMBER_OUTPUT_STATEMENT);
-        return Console.readLine();
+        return validateBonusNumber(Console.readLine());
     }
 
-    private int purchaseAmountValidator(String input) {
+    private int validatepurchaseAmount(String input) {
         final int PURCHASE_AMOUNT_UNIT = 1000;
         int amount;
         try {
@@ -38,5 +38,13 @@ public class InputView {
             throw new IllegalArgumentException("구매금액은 1000원 단위로 나누어 떨어져야 합니다.");
         }
         return amount;
+    }
+
+    public int validateBonusNumber(String input) {
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("보너스 번호는 1부터 45 사이의 숫자여야 합니다.");
+        }
     }
 }
